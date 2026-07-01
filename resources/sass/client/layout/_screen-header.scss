@@ -38,15 +38,19 @@
     svg { width: 22px; height: 22px; stroke: $c-ink; }
   }
 
-  &__bell-dot {
+  &__bell-badge {
     position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 8px;
-    height: 8px;
-    border-radius: $r-round;
+    top: 4px;
+    right: 4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 3px;
+    border-radius: $r-pill;
     background: $c-accent;
+    color: $c-white;
     border: 1.5px solid $c-white;
+    font: #{$fw-extra} #{$fs-cap-sm}/16px #{$font-sans};
+    text-align: center;
   }
 
   &__action {

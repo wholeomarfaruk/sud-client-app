@@ -16,3 +16,64 @@ if (!function_exists('file_path')) {
         return $item ? asset('storage/' . $item->path) : null;
     }
 }
+
+if (!function_exists('bdt_money')) {
+    // Bengali-style digit grouping, e.g. 3850000 -> "৳ 38,50,000"
+    function bdt_money($amount, bool $withSymbol = true): string
+    {
+        $negative = (float) $amount < 0;
+        $intPart = (string) (int) round(abs((float) $amount));
+
+        if (strlen($intPart) > 3) {
+            $lastThree = substr($intPart, -3);
+            $rest = substr($intPart, 0, -3);
+            $groups = [];
+
+            while (strlen($rest) > 2) {
+                $groups[] = substr($rest, -2);
+                $rest = substr($rest, 0, -2);
+            }
+
+            if ($rest !== '') {
+                $groups[] = $rest;
+            }
+
+            $formatted = implode(',', array_reverse($groups)) . ',' . $lastThree;
+        } else {
+            $formatted = $intPart;
+        }
+
+        $formatted = ($negative ? '-' : '') . $formatted;
+
+        return $withSymbol ? '৳ ' . $formatted : $formatted;
+    }
+}
+
+if (!function_exists('bdt_lakh')) {
+    // Compact lakh notation, e.g. 3850000 -> "৳ 38.5L", 2000000 -> "৳ 20L"
+    function bdt_lakh($amount, bool $withSymbol = true): string
+    {
+        $negative = (float) $amount < 0;
+        $lakh = abs((float) $amount) / 100000;
+
+        $formatted = rtrim(rtrim(number_format($lakh, 2, '.', ''), '0'), '.');
+        $formatted = ($negative ? '-' : '') . $formatted . 'L';
+
+        return $withSymbol ? '৳ ' . $formatted : $formatted;
+    }
+}
+
+if (!function_exists('initials')) {
+    // "Md. Rafiqul Islam" -> "RI" (skips honorific prefixes like Md./Mr./Mrs./Ms.)
+    function initials(string $name): string
+    {
+        $words = array_filter(
+            preg_split('/\s+/', trim($name)),
+            fn ($word) => ! in_array(mb_strtolower(rtrim($word, '.')), ['md', 'mr', 'mrs', 'ms'], true)
+        );
+
+        $letters = array_map(fn ($word) => mb_strtoupper(mb_substr($word, 0, 1)), array_slice($words, 0, 2));
+
+        return implode('', $letters) ?: '?';
+    }
+}

@@ -7,7 +7,9 @@
             <img src="{{ asset('images/client/sud-logo-white.png') }}" alt="Star Unity Development" class="dashboard-header__logo">
             <a href="{{ route('client.notifications') }}" class="dashboard-header__bell" aria-label="Notifications">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-                <span class="dashboard-header__bell-dot"></span>
+                @if ($unreadNotifications > 0)
+                    <span class="dashboard-header__bell-badge">{{ $unreadNotifications > 9 ? '9+' : $unreadNotifications }}</span>
+                @endif
             </a>
         </div>
 
@@ -32,18 +34,20 @@
         </div>
     </header>
 
-    <div class="next-installment">
-        <div class="next-installment__row">
-            <span class="next-installment__label">Next installment due</span>
-            <span class="next-installment__pill">{{ $nextInstallment['due_in'] }}</span>
+    @if ($nextInstallment)
+        <div class="next-installment">
+            <div class="next-installment__row">
+                <span class="next-installment__label">Next installment due</span>
+                <span class="next-installment__pill">{{ $nextInstallment['due_in'] }}</span>
+            </div>
+            <div class="next-installment__amount">{{ $nextInstallment['amount'] }}</div>
+            <div class="next-installment__meta">{{ $nextInstallment['meta'] }}</div>
+            <a href="{{ route('client.installments') }}" class="btn btn--outline next-installment__cta">
+                View installment details
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
         </div>
-        <div class="next-installment__amount">{{ $nextInstallment['amount'] }}</div>
-        <div class="next-installment__meta">{{ $nextInstallment['meta'] }}</div>
-        <a href="{{ route('client.installments') }}" class="btn btn--outline next-installment__cta">
-            View installment details
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-    </div>
+    @endif
 
     <div class="quick-actions" style="padding-left:18px;padding-right:18px">
         <a href="{{ route('client.installments') }}" class="quick-actions__item">

@@ -11,9 +11,9 @@
     </div>
 
     <div class="auth-screen__h1">Enter verification code</div>
-    <div class="auth-screen__sub">We sent a 6-digit code to<br><strong>+880 1712-345678</strong> via SMS.</div>
+    <div class="auth-screen__sub">We sent a 6-digit code to<br><strong>{{ $destination }}</strong> via {{ $channel === 'email' ? 'email' : 'SMS' }}.</div>
 
-    <x-client.otp-input :redirect-to="route('dashboard')" />
+    <x-client.otp-input :otp-error="$otpError" />
 
     <div class="auth-screen__spacer"></div>
 

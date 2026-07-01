@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
          $middleware->alias([
             'panel' => \App\Http\Middleware\PanelMiddleware::class,
+            'client.auth' => \App\Http\Middleware\EnsureClientIsAuthenticated::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

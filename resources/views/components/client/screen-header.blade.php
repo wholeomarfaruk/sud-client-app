@@ -3,6 +3,10 @@
      and slot `trailing` to override the default notification bell. --}}
 @props(['title', 'back' => null, 'bell' => true])
 
+@php
+    $screenHeaderUnread = data_get($sidebar, 'unread_notifications', 3);
+@endphp
+
 <div class="screen-header">
     @if ($back)
         <a href="{{ $back }}" class="screen-header__icon-btn" aria-label="Back">
@@ -22,7 +26,9 @@
         @if ($bell)
             <a href="{{ route('client.notifications') }}" class="screen-header__bell" aria-label="Notifications">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-                <span class="screen-header__bell-dot"></span>
+                @if ($screenHeaderUnread > 0)
+                    <span class="screen-header__bell-badge">{{ $screenHeaderUnread > 9 ? '9+' : $screenHeaderUnread }}</span>
+                @endif
             </a>
         @else
             <span style="width:22px"></span>

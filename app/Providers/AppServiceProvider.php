@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 use Laravel\Fortify\Contracts\LoginResponse;
@@ -28,6 +29,11 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
         $this->registerActivityTracking();
         $this->registerAuthListeners();
+
+        View::composer(
+            ['components.client.drawer', 'components.client.screen-header'],
+            \App\Http\ViewComposers\ClientSidebarComposer::class
+        );
     }
 
     protected function registerActivityTracking(): void

@@ -1,7 +1,6 @@
 {{-- 6-digit OTP entry: auto-advance, backspace-back, paste-split, resend countdown.
-     UI phase only — "Verify & continue" just navigates to $redirectTo once all 6
-     cells are filled (no server call yet; see README §7). --}}
-@props(['redirectTo'])
+     "Verify & continue" submits the code to the Otp Livewire component's verify() action. --}}
+@props(['otpError' => ''])
 
 <div x-data="otpInput()">
     <div class="otp__cells">
@@ -20,9 +19,15 @@
 
     <button type="button" class="btn btn--primary" style="margin-top:26px"
             :disabled="!complete"
-            @click="complete && (window.location.href = '{{ $redirectTo }}')">
-        Verify &amp; continue
+            wire:loading.attr="disabled" wire:target="verify"
+            @click="complete && $wire.verify(digits.join(''))">
+        <span wire:loading.remove wire:target="verify">Verify &amp; continue</span>
+        <span wire:loading wire:target="verify">Verifying&hellip;</span>
     </button>
+
+    @if ($otpError !== '')
+        <div style="color:#d92d20;font-size:13px;margin-top:12px">{{ $otpError }}</div>
+    @endif
 
     <p class="otp__resend">
         Didn't get the code?

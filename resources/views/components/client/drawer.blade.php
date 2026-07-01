@@ -4,6 +4,12 @@
      bottom-nav "Menu" tab. --}}
 @props(['active' => null])
 
+@php
+    $sidebarName = data_get($sidebar, 'user.name', 'Md. Rafiqul Islam');
+    $sidebarCustomerId = data_get($sidebar, 'customer.customer_id', 'SUD-10472');
+    $sidebarUnreadNotifications = data_get($sidebar, 'unread_notifications', 3);
+@endphp
+
 <div x-data x-show="$store.drawer.open" x-cloak
      x-effect="document.documentElement.style.overflow = $store.drawer.open ? 'hidden' : ''">
     <div class="drawer__scrim"
@@ -22,10 +28,10 @@
             <img src="{{ asset('images/client/sud-logo-white.png') }}" alt="Star Unity Development" class="drawer__logo">
 
             <div class="drawer__user">
-                <div class="drawer__avatar">RI</div>
+                <div class="drawer__avatar">{{ initials($sidebarName) }}</div>
                 <div>
-                    <div class="drawer__name">Md. Rafiqul Islam</div>
-                    <div class="drawer__id">ID: SUD-10472</div>
+                    <div class="drawer__name">{{ $sidebarName }}</div>
+                    <div class="drawer__id">ID: {{ $sidebarCustomerId }}</div>
                 </div>
             </div>
         </div>
@@ -58,7 +64,9 @@
             <a href="{{ route('client.notifications') }}" class="drawer__nav-item {{ $active === 'notifications' ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
                 <span>Notifications</span>
-                <span class="drawer__badge">3</span>
+                @if ($sidebarUnreadNotifications > 0)
+                    <span class="drawer__badge">{{ $sidebarUnreadNotifications }}</span>
+                @endif
             </a>
             <a href="{{ route('client.profile') }}" class="drawer__nav-item {{ $active === 'profile' ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
@@ -81,10 +89,13 @@
                 </span>
                 WhatsApp Chat
             </a>
-            <button type="button" class="drawer__support-link drawer__logout" @click="$store.drawer.open = false">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-                Logout
-            </button>
+            <form method="POST" action="{{ route('client.logout') }}">
+                @csrf
+                <button type="submit" class="drawer__support-link drawer__logout">
+                    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                    Logout
+                </button>
+            </form>
         </div>
     </nav>
 </div>

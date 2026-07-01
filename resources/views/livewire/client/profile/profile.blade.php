@@ -10,7 +10,7 @@
             </button>
         </div>
         <div class="profile-hero__user">
-            <div class="profile-avatar">RI</div>
+            <div class="profile-avatar">{{ initials($name) }}</div>
             <div class="profile-hero__name">{{ $name }}</div>
             <div class="profile-hero__id">Customer ID · {{ $customerId }}</div>
         </div>
@@ -44,7 +44,7 @@
                     <div class="profile-list__label">NID</div>
                     <div class="profile-list__value">{{ $nid }}</div>
                 </div>
-                <span class="badge badge--green u-ml-auto">VERIFIED</span>
+                <span class="badge badge--{{ $kyc['variant'] }} u-ml-auto">{{ $kyc['label'] }}</span>
             </div>
         </div>
 

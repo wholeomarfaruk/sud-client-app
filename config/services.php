@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'erp' => [
+        'base_url' => env('ERP_API_BASE_URL', 'http://127.0.0.1:8000/api/client'),
+        'timeout' => env('ERP_API_TIMEOUT', 15),
+    ],
+
 ];

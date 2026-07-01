@@ -15,6 +15,7 @@
             autocomplete="new-password"
             style="letter-spacing: 3px"
             @input="$dispatch('pf-input', { name: '{{ $name }}', value: $event.target.value })"
+            {{ $attributes->whereStartsWith('wire') }}
         >
         <button type="button" class="form-field__toggle" @click="show = !show" aria-label="Toggle password visibility">
             <svg x-show="!show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
