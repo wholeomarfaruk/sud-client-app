@@ -1,0 +1,23 @@
+// pages/_installments.scss — 09 Installment Schedule
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.installment-summary {
+  @include card($r-xl);
+  padding: $sp-4 $sp-5;
+  display: flex;
+  justify-content: space-between;
+
+  &__label { font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans}; color: $c-muted-2; }
+
+  &__value {
+    font: #{$fw-extra} #{$fs-title}/1 #{$font-sans};
+    color: $c-ink;
+    margin-top: 3px;
+
+    &--accent { color: $c-primary; }
+    &--due { color: $c-accent; }
+  }
+}
+
+.installments-body { padding-bottom: calc(#{$bottom-nav-h} + 14px); }

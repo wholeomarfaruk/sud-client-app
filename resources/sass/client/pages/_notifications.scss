@@ -1,0 +1,9 @@
+// pages/_notifications.scss — 13 Notifications
+@use '../abstracts/tokens' as *;
+
+.notifications-list {
+  padding: 0 $screen-pad calc(#{$bottom-nav-h} + 14px);
+  display: flex;
+  flex-direction: column;
+  gap: $sp-3;
+}

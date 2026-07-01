@@ -1,0 +1,33 @@
+// components/_stat-strip.scss — dashboard header 3-up stat pill
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.stat-strip {
+  display: flex;
+  align-items: center;
+  margin-top: $sp-4;
+  background: rgba($c-white, .13);
+  border-radius: $r-2xl;
+  padding: 11px 0;
+
+  &__cell { flex: 1; text-align: center; }
+
+  &__value {
+    font: #{$fw-extra} 17px/1 #{$font-sans};
+    color: $c-white;
+
+    &--accent { color: $c-accent-soft; }
+  }
+
+  &__label {
+    font: #{$fw-medium} #{$fs-micro}/1 #{$font-sans};
+    color: rgba($c-white, .78);
+    margin-top: 3px;
+  }
+
+  &__divider {
+    width: 1px;
+    height: 26px;
+    background: rgba($c-white, .22);
+  }
+}

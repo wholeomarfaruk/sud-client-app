@@ -1,0 +1,9 @@
+// pages/_offers.scss — 11 Offers
+@use '../abstracts/tokens' as *;
+
+.offers-list {
+  padding: 0 $screen-pad calc(#{$bottom-nav-h} + 14px);
+  display: flex;
+  flex-direction: column;
+  gap: $sp-6;
+}

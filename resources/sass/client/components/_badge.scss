@@ -1,0 +1,24 @@
+// components/_badge.scss — status pills (ON SCHEDULE, PAID, PINNED, VERIFIED, category tags...)
+@use '../abstracts/tokens' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: #{$fw-bold} #{$fs-cap-sm}/1 #{$font-sans};
+  padding: 3px $sp-3;
+  border-radius: $r-pill;
+  letter-spacing: .02em;
+
+  &--green  { background: $c-green-tint; color: $c-primary; }
+  &--gold   { background: $c-gold-tint; color: $c-gold; }
+  &--accent { background: $c-accent-tint; color: $c-accent; }
+
+  &--on-white-green  { background: $c-white; color: $c-primary; }
+  &--on-white-gold   { background: $c-white; color: $c-gold; }
+  &--on-white-accent { background: $c-white; color: $c-accent; }
+
+  &--solid-accent { background: $c-accent; color: $c-white; }
+
+  &--lg { padding: 5px $sp-3; font-size: #{$fs-cap}; }
+}

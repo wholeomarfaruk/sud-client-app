@@ -1,0 +1,9 @@
+// pages/_properties.scss — 06 My Properties
+@use '../abstracts/tokens' as *;
+
+.properties-list {
+  padding: 0 $screen-pad calc(#{$bottom-nav-h} + 14px);
+  display: flex;
+  flex-direction: column;
+  gap: $sp-4;
+}

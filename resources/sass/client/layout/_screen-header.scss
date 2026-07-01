@@ -1,0 +1,90 @@
+// layout/_screen-header.scss
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+// Hamburger/back + title + bell (or text action) row used on most
+// authenticated screens (§6: My Properties, Payment History, Installments,
+// Noticeboard, Offers, News, Notifications).
+.screen-header {
+  @include safe-top;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $sp-1 $screen-pad $sp-3;
+
+  &__icon-btn {
+    @include tap-target;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    color: $c-ink;
+
+    svg { width: 22px; height: 22px; stroke: $c-ink; }
+  }
+
+  &__title {
+    font: #{$fw-bold} #{$fs-h3}/1 #{$font-sans};
+    color: $c-ink;
+  }
+
+  &__bell {
+    position: relative;
+    @include tap-target;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg { width: 22px; height: 22px; stroke: $c-ink; }
+  }
+
+  &__bell-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    border-radius: $r-round;
+    background: $c-accent;
+    border: 1.5px solid $c-white;
+  }
+
+  &__action {
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-primary;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+// Installments header "Heights ▾" property selector dropdown
+.property-select {
+  position: relative;
+
+  &__menu {
+    position: absolute;
+    right: 0;
+    top: 28px;
+    background: $c-white;
+    border: 1px solid $c-border;
+    border-radius: $r-md;
+    box-shadow: $sh-raised;
+    min-width: 120px;
+    z-index: 10;
+    overflow: hidden;
+  }
+
+  &__option {
+    @include tap-target;
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 10px 14px;
+    font: #{$fw-semibold} #{$fs-meta}/1 #{$font-sans};
+    color: $c-ink;
+    background: none;
+
+    &:hover { background: $c-bg-mist; }
+  }
+}

@@ -1,0 +1,19 @@
+// components/_progress.scss
+@use '../abstracts/tokens' as *;
+
+.progress {
+  height: 8px;
+  border-radius: 6px;
+  background: $c-green-tint;
+  margin-top: 7px;
+  overflow: hidden;
+
+  &--gold { background: $c-gold-tint; }
+
+  &__fill {
+    height: 100%;
+    background: $grad-progress;
+
+    .progress--gold & { background: $grad-gold; }
+  }
+}

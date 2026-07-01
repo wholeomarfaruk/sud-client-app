@@ -1,0 +1,53 @@
+// pages/_payments.scss — 08 Payment History
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.payment-summary {
+  @include card($r-2xl);
+  background: $grad-green-card;
+  border: none;
+  padding: $sp-5 $sp-6;
+  color: $c-white;
+
+  &__label { font: #{$fw-medium} #{$fs-meta}/1 #{$font-sans}; color: rgba($c-white, .82); }
+  &__amount { font: #{$fw-extra} #{$fs-display - 2px}/1 #{$font-sans}; margin-top: 4px; }
+  &__meta { font: #{$fw-medium} #{$fs-cap}/1 #{$font-sans}; color: rgba($c-white, .8); margin-top: 2px; }
+}
+
+.filter-chips {
+  display: flex;
+  gap: $sp-2;
+  margin-top: $sp-4;
+}
+
+.filter-chip {
+  @include tap-target;
+  font: #{$fw-bold} #{$fs-cap}/1 #{$font-sans};
+  padding: 7px $sp-4;
+  border-radius: $r-pill;
+  background: $c-white;
+  color: $c-muted;
+  border: 1px solid $c-border;
+
+  &.is-active {
+    background: $c-primary;
+    color: $c-white;
+    border-color: $c-primary;
+  }
+}
+
+.payments-month-label {
+  font: #{$fw-bold} #{$fs-cap}/1 #{$font-sans};
+  color: $c-muted-2;
+  margin-top: $sp-5;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.payments-list {
+  margin-top: $sp-3;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding-bottom: calc(#{$bottom-nav-h} + 14px);
+}

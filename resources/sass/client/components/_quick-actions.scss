@@ -1,0 +1,41 @@
+// components/_quick-actions.scss — dashboard 2x4 icon grid
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: $sp-3;
+  justify-items: center;
+  padding-top: $sp-3;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: $r-lg;
+    background: $c-green-tint;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg { width: 21px; height: 21px; stroke: $c-primary; }
+
+    &--accent {
+      background: $c-accent-tint;
+      svg { stroke: $c-accent; }
+    }
+  }
+
+  &__label {
+    font: #{$fw-semibold} 10.5px/1.2 #{$font-sans};
+    color: $c-ink-2;
+    text-align: center;
+  }
+}

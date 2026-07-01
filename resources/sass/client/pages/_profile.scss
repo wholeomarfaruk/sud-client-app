@@ -1,0 +1,103 @@
+// pages/_profile.scss — 14 Profile
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.profile-hero {
+  background: $grad-green;
+  padding: 48px $screen-pad $sp-8;
+  color: $c-white;
+  @include safe-top;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title { font: #{$fw-bold} #{$fs-sm + 1px}/1 #{$font-sans}; }
+
+  &__icon-btn {
+    @include tap-target;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg { width: 22px; height: 22px; stroke: $c-white; }
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: $sp-4;
+  }
+
+  &__name { font: #{$fw-extra} #{$fs-h3 + 2px}/1 #{$font-sans}; margin-top: $sp-3; }
+  &__id { font: #{$fw-medium} #{$fs-meta}/1 #{$font-sans}; color: rgba($c-white, .8); }
+}
+
+.profile-avatar {
+  width: 78px;
+  height: 78px;
+  border-radius: $r-2xl + 6px;
+  background: $c-accent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: #{$fw-extra} 30px/1 #{$font-sans};
+  border: 3px solid rgba($c-white, .35);
+  color: $c-white;
+  flex-shrink: 0;
+
+  &--sm {
+    width: 46px;
+    height: 46px;
+    border-radius: $r-md;
+    font-size: #{$fs-title};
+    border: none;
+  }
+}
+
+.profile-body {
+  flex: 1;
+  padding: $screen-pad;
+  padding-bottom: calc(#{$bottom-nav-h} + 18px);
+}
+
+.profile-section-label {
+  font: #{$fw-bold} #{$fs-cap}/1 #{$font-sans};
+  color: $c-muted-2;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-top: $sp-6;
+
+  &:first-child { margin-top: 0; }
+}
+
+.profile-list {
+  background: $c-white;
+  border: 1px solid $c-border;
+  border-radius: $r-md;
+  margin-top: 9px;
+
+  &--row {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    padding: 13px 14px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: $sp-3;
+    padding: 13px 14px;
+    border-bottom: 1px solid $c-divider;
+
+    &:last-child { border-bottom: none; }
+
+    svg { width: 18px; height: 18px; stroke: $c-primary; }
+  }
+
+  &__label { font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans}; color: $c-muted-2; }
+  &__value { font: #{$fw-semibold} #{$fs-meta}/1 #{$font-sans}; color: $c-ink; margin-top: 1px; }
+}

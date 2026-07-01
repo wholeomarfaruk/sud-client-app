@@ -1,0 +1,20 @@
+// components/_card.scss
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.card {
+  @include card;
+  padding: $sp-5;
+}
+
+// 3-up fact chip row (Property Detail: Size / Floor / Facing)
+.fact-chip {
+  flex: 1;
+  background: $c-white;
+  border: 1px solid $c-border;
+  border-radius: $r-md;
+  padding: $sp-3;
+
+  &__label { font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans}; color: $c-muted-2; }
+  &__value { font: #{$fw-bold} #{$fs-sm}/1.3 #{$font-sans}; color: $c-ink; margin-top: 3px; }
+}

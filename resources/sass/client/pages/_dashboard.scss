@@ -1,0 +1,110 @@
+// pages/_dashboard.scss — 05 Dashboard
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.dashboard-header {
+  background: $grad-green;
+  padding: $sp-2 $sp-5 $sp-5;
+  color: $c-white;
+  border-radius: 0 0 $header-green-radius $header-green-radius;
+  @include safe-top;
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__icon-btn {
+    @include tap-target;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg { width: 24px; height: 24px; stroke: $c-white; }
+  }
+
+  &__logo { height: 40px; }
+
+  &__bell {
+    position: relative;
+    @include tap-target;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg { width: 23px; height: 23px; stroke: $c-white; }
+  }
+
+  &__bell-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 9px;
+    height: 9px;
+    border-radius: $r-round;
+    background: $c-accent;
+    border: 1.5px solid $c-green-700;
+  }
+
+  &__greeting {
+    font: #{$fw-medium} #{$fs-meta}/1 #{$font-sans};
+    color: rgba($c-white, .82);
+    margin-top: $sp-3;
+  }
+
+  &__name {
+    font: #{$fw-extra} #{$fs-h3 + 3px}/1 #{$font-sans};
+    margin-top: 2px;
+  }
+}
+
+.next-installment {
+  margin: -16px $screen-pad 0;
+  @include card($r-2xl);
+  padding: $sp-6;
+  box-shadow: $sh-raised;
+  position: relative;
+  z-index: 1;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__label { font: #{$fw-semibold} #{$fs-meta}/1 #{$font-sans}; color: $c-muted; }
+
+  &__pill {
+    font: #{$fw-bold} #{$fs-cap-sm}/1 #{$font-sans};
+    color: $c-accent;
+    background: $c-accent-tint;
+    padding: 3px $sp-3;
+    border-radius: $r-pill;
+  }
+
+  &__amount {
+    font: #{$fw-extra} #{$fs-display}/1 #{$font-sans};
+    color: $c-ink;
+    margin-top: $sp-2;
+  }
+
+  &__meta {
+    font: #{$fw-medium} #{$fs-meta}/1 #{$font-sans};
+    color: $c-muted;
+    margin-top: 2px;
+  }
+
+  &__cta { margin-top: $sp-4; }
+}
+
+.dashboard-section {
+  padding: $sp-3 $screen-pad 0;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  &__title { font: #{$fw-bold} #{$fs-title}/1.1 #{$font-sans}; color: $c-ink; }
+  &__link  { font: #{$fw-semibold} #{$fs-meta}/1.1 #{$font-sans}; color: $c-primary; }
+}

@@ -1,0 +1,100 @@
+// components/_form-field.scss — labeled input + focus ring + eye toggle
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.form-field {
+  margin-top: $sp-7;
+
+  &--tight { margin-top: $sp-5; }
+
+  &__label {
+    font: #{$fw-semibold} #{$fs-meta}/1.2 #{$font-sans};
+    color: $c-ink-2;
+  }
+
+  &__input-wrap {
+    margin-top: $sp-2;
+    height: 52px;
+    border: 1.5px solid $c-border-2;
+    border-radius: $r-md;
+    background: $c-white;
+    display: flex;
+    align-items: center;
+    padding: 0 $sp-5;
+    gap: $sp-3;
+    transition: border-color .15s ease, box-shadow .15s ease;
+
+    &.is-focused,
+    &:focus-within {
+      border-color: $c-primary;
+      box-shadow: 0 4px 14px rgba(27, 138, 61, .1);
+    }
+
+    &--sm { height: 50px; }
+  }
+
+  &__icon {
+    width: 18px;
+    height: 18px;
+    stroke: $c-muted-2;
+    flex-shrink: 0;
+
+    .form-field__input-wrap.is-focused &,
+    .form-field__input-wrap:focus-within & { stroke: $c-primary; }
+  }
+
+  &__input {
+    border: none;
+    outline: none;
+    flex: 1;
+    min-width: 0;
+    font: #{$fw-semibold} #{$fs-body}/1 #{$font-sans};
+    color: $c-ink;
+    background: none;
+
+    &::placeholder { color: $c-muted-3; letter-spacing: normal; }
+  }
+
+  &__toggle {
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg { width: 19px; height: 19px; stroke: $c-muted-2; }
+  }
+
+  &__hint {
+    align-self: flex-end;
+    margin-top: 13px;
+    font: #{$fw-semibold} #{$fs-meta}/1 #{$font-sans};
+    color: $c-primary;
+  }
+}
+
+// Live password-rule checklist (Change Password / OTP-adjacent forms)
+.rule-checklist {
+  background: $c-bg-mist;
+  border-radius: $r-md;
+  padding: $sp-4 $sp-5;
+  margin-top: $sp-6;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-2;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-muted-2;
+
+    svg { width: 15px; height: 15px; stroke: $c-muted-2; }
+
+    &.is-met {
+      color: $c-primary;
+      svg { stroke: $c-primary; }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+// pages/_news.scss — 12 News (Blogs)
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.news-list {
+  padding: 0 $screen-pad calc(#{$bottom-nav-h} + 14px);
+  display: flex;
+  flex-direction: column;
+  gap: $sp-4;
+}
+
+.news-featured {
+  display: block;
+  border-radius: $r-xl;
+  overflow: hidden;
+  border: 1px solid $c-border;
+  background: $c-white;
+
+  &__banner {
+    height: 140px;
+    background: $grad-green-card;
+    display: flex;
+    align-items: flex-end;
+    padding: $sp-3;
+  }
+
+  &__body { padding: 13px; }
+  &__title { font: #{$fw-bold} #{$fs-title}/1.35 #{$font-sans}; color: $c-ink; }
+  &__meta { font: #{$fw-medium} #{$fs-cap}/1 #{$font-sans}; color: $c-muted-2; margin-top: 7px; }
+}
+
+.news-row {
+  display: flex;
+  gap: $sp-3;
+  background: $c-white;
+  border: 1px solid $c-border;
+  border-radius: $r-xl;
+  padding: 11px;
+
+  &__thumb {
+    width: 78px;
+    height: 72px;
+    border-radius: 11px;
+    flex-shrink: 0;
+
+    &--gold  { background: $grad-gold; }
+    &--green { background: linear-gradient(135deg, #{$c-green-700}, #{$c-green-500}); }
+  }
+
+  &__title { font: #{$fw-bold} #{$fs-meta}/1.35 #{$font-sans}; color: $c-ink; }
+  &__meta { font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans}; color: $c-muted-2; margin-top: 6px; }
+}

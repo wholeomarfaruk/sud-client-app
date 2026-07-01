@@ -1,0 +1,73 @@
+// pages/_welcome.scss — 01 Welcome
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.welcome-screen {
+  position: relative;
+  min-height: 100dvh;
+  background: $grad-green;
+  overflow: hidden;
+  color: $c-white;
+
+  &__circle {
+    position: absolute;
+    border-radius: $r-round;
+
+    &--accent { top: -70px; right: -60px; width: 260px; height: 260px; background: rgba($c-accent, .16); }
+    &--white  { bottom: 90px; left: -70px; width: 230px; height: 230px; background: rgba($c-white, .06); }
+  }
+
+  &__content {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    padding: 64px 30px 34px;
+    @include safe-top;
+    @include safe-bottom;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__logo-tile {
+    width: 120px;
+    height: 120px;
+    border-radius: $r-2xl + 12px;
+    background: $c-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .22);
+
+    img { width: 88px; height: 88px; object-fit: contain; }
+  }
+
+  &__headline {
+    font: #{$fw-extra} #{$fs-h1 + 1px}/1.2 #{$font-sans};
+    margin-top: $sp-8;
+    letter-spacing: -.01em;
+  }
+
+  &__sub {
+    font: #{$fw-medium} #{$fs-body}/1.5 #{$font-sans};
+    color: rgba($c-white, .82);
+    margin-top: $sp-4;
+    max-width: 280px;
+  }
+
+  &__footer {
+    text-align: center;
+    font: #{$fw-semibold} #{$fs-sm}/1 #{$font-sans};
+    color: rgba($c-white, .9);
+    margin-top: $sp-5;
+
+    u { text-decoration: underline; }
+  }
+}

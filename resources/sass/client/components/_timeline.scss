@@ -1,0 +1,86 @@
+// components/_timeline.scss — installment schedule vertical timeline
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  margin-top: $sp-5;
+
+  &__row { display: flex; gap: $sp-4; }
+
+  &__rail { display: flex; flex-direction: column; align-items: center; }
+
+  &__node {
+    width: 26px;
+    height: 26px;
+    border-radius: $r-round;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &--done { background: $c-primary; svg { stroke: $c-white; } }
+    &--due  { border: 2px solid $c-accent; background: $c-accent-tint; }
+    &--upcoming { border: 2px solid $c-border-3; background: $c-white; }
+
+    svg { width: 14px; height: 14px; }
+  }
+
+  &__connector {
+    width: 2px;
+    flex: 1;
+    min-height: 26px;
+    background: $c-green-tint-2;
+
+    &--muted { background: $c-border-2; }
+  }
+
+  &__content { flex: 1; padding-bottom: $sp-4; }
+
+  &__row-head { display: flex; justify-content: space-between; }
+
+  &__title {
+    font: #{$fw-bold} #{$fs-sm}/1.3 #{$font-sans};
+    color: $c-ink;
+
+    &--muted { color: $c-muted; }
+  }
+
+  &__amount {
+    font: #{$fw-bold} #{$fs-meta}/1.3 #{$font-sans};
+    color: $c-ink;
+
+    &--muted { color: $c-muted; }
+    &--accent { color: $c-accent; }
+  }
+
+  &__meta {
+    font: #{$fw-medium} #{$fs-cap}/1.3 #{$font-sans};
+    color: $c-muted-2;
+  }
+
+  &__due-card {
+    background: #FFF8F1;
+    border: 1.5px solid $c-accent-border;
+    border-radius: $r-md;
+    padding: 11px $sp-3;
+  }
+
+  &__due-label {
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-accent;
+    margin-top: 1px;
+  }
+
+  &__pay-btn {
+    @include tap-target;
+    margin-top: $sp-2;
+    width: 100%;
+    height: 38px;
+    border-radius: $r-sm;
+    background: $c-accent;
+    color: $c-white;
+    font: #{$fw-bold} #{$fs-meta}/1 #{$font-sans};
+  }
+}

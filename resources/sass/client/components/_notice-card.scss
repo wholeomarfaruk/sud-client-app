@@ -1,0 +1,46 @@
+// components/_notice-card.scss
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.notice-card {
+  @include card($r-2xl);
+  padding: $sp-4;
+
+  &--pinned {
+    border-color: $c-accent-border;
+    box-shadow: 0 4px 12px rgba(244, 124, 32, .08);
+  }
+
+  &__flag {
+    display: flex;
+    align-items: center;
+    gap: $sp-2;
+    color: $c-accent;
+
+    svg { width: 15px; height: 15px; }
+  }
+
+  &__flag-label {
+    font: #{$fw-bold} #{$fs-cap-sm}/1 #{$font-sans};
+    color: $c-accent;
+    letter-spacing: .04em;
+  }
+
+  &__title {
+    font: #{$fw-bold} #{$fs-title}/1.35 #{$font-sans};
+    color: $c-ink;
+    margin-top: $sp-2;
+  }
+
+  &__body {
+    font: #{$fw-medium} #{$fs-meta}/1.5 #{$font-sans};
+    color: $c-muted;
+    margin-top: 4px;
+  }
+
+  &__date {
+    font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans};
+    color: $c-muted-2;
+    margin-top: $sp-2;
+  }
+}

@@ -1,0 +1,66 @@
+// components/_otp-input.scss
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.otp {
+  &__cells {
+    display: flex;
+    gap: 9px;
+    margin-top: $sp-7;
+  }
+
+  &__cell {
+    flex: 1;
+    height: 56px;
+    border: 1.5px solid $c-border-2;
+    border-radius: $r-md;
+    background: $c-white;
+    text-align: center;
+    font: #{$fw-extra} 24px/1 #{$font-sans};
+    color: $c-ink;
+    caret-color: $c-primary;
+
+    &:focus {
+      outline: none;
+      border-color: $c-primary;
+      box-shadow: 0 4px 14px rgba(27, 138, 61, .12);
+    }
+
+    &.is-filled {
+      border-color: $c-primary;
+      box-shadow: 0 4px 14px rgba(27, 138, 61, .12);
+    }
+  }
+
+  &__resend {
+    text-align: center;
+    margin-top: $sp-6;
+    font: #{$fw-medium} #{$fs-sm}/1 #{$font-sans};
+    color: $c-muted;
+  }
+
+  &__timer { color: $c-muted-2; }
+
+  &__resend-btn {
+    color: $c-primary;
+    font-weight: #{$fw-bold};
+  }
+
+  &__warning {
+    margin-top: auto;
+    background: #FFF8F1;
+    border: 1px solid $c-accent-border;
+    border-radius: $r-md;
+    padding: 13px 15px;
+    display: flex;
+    gap: 11px;
+    align-items: center;
+
+    svg { width: 20px; height: 20px; stroke: $c-accent; flex-shrink: 0; }
+  }
+
+  &__warning-text {
+    font: #{$fw-medium} #{$fs-cap}/1.45 #{$font-sans};
+    color: #8A5A2B;
+  }
+}

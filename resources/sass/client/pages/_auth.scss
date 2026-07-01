@@ -1,0 +1,85 @@
+// pages/_auth.scss — 02 Login · 03 Forgot Password · 04 OTP
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.auth-screen {
+  padding: 40px 28px 34px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  @include safe-top;
+  @include safe-bottom;
+
+  &--with-back { padding-top: 20px; }
+
+  &__logo { height: 42px; align-self: flex-start; }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    gap: $sp-4;
+  }
+
+  &__back-icon {
+    @include tap-target;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1.5px solid $c-border-2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__back-label { font: #{$fw-semibold} #{$fs-sm}/1 #{$font-sans}; color: $c-muted; }
+
+  &__icon-tile {
+    width: 72px;
+    height: 72px;
+    border-radius: $r-2xl + 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: $sp-8 + 12px;
+
+    &--accent { background: $c-accent-tint; svg { stroke: $c-accent; } }
+    &--green  { background: $c-green-tint; svg { stroke: $c-primary; } }
+
+    svg { width: 34px; height: 34px; }
+  }
+
+  &__h1 {
+    font: #{$fw-extra} #{$fs-h1}/1.2 #{$font-sans};
+    color: $c-ink;
+    margin-top: $sp-8 + 10px;
+    letter-spacing: -.01em;
+  }
+
+  &__sub {
+    font: #{$fw-medium} #{$fs-body}/1.55 #{$font-sans};
+    color: $c-muted;
+    margin-top: $sp-2;
+
+    strong { color: $c-ink; font-weight: #{$fw-bold}; }
+  }
+
+  &__spacer { flex: 1; }
+
+  &__footnote {
+    text-align: center;
+    font: #{$fw-medium} #{$fs-meta}/1.4 #{$font-sans};
+    color: $c-muted-2;
+  }
+
+  &__info-box {
+    margin-top: $sp-5;
+    background: $c-green-tint;
+    border-radius: 12px;
+    padding: $sp-4 $sp-5;
+    font: #{$fw-medium} #{$fs-meta}/1.5 #{$font-sans};
+    color: #3A6B45;
+
+    b { color: $c-primary-dark; }
+  }
+}

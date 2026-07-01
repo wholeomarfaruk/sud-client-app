@@ -1,0 +1,82 @@
+// components/_property-card.scss — My Properties list card
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.property-card {
+  @include card($r-2xl);
+  display: block;
+  overflow: hidden;
+
+  &__banner {
+    height: 108px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: $sp-3;
+
+    &--green { background: $grad-green-banner; }
+    &--gold  { background: $grad-gold; }
+  }
+
+  &__status-pill {
+    position: absolute;
+    top: $sp-3;
+    right: $sp-3;
+    background: $c-white;
+    font: #{$fw-bold} #{$fs-cap-sm}/1 #{$font-sans};
+    padding: 4px $sp-3;
+    border-radius: $r-pill;
+
+    &--green { color: $c-primary; }
+    &--gold  { color: $c-gold; }
+  }
+
+  &__watermark {
+    position: absolute;
+    right: $sp-4;
+    bottom: $sp-2;
+    opacity: .25;
+
+    svg { width: 80px; height: 70px; stroke: $c-white; }
+  }
+
+  &__title { font: #{$fw-extra} #{$fs-title}/1.2 #{$font-sans}; color: $c-white; }
+
+  &__meta {
+    font: #{$fw-medium} #{$fs-cap}/1.3 #{$font-sans};
+    color: rgba($c-white, .85);
+    margin-top: 3px;
+  }
+
+  &__body { padding: $sp-4; }
+
+  &__progress-row {
+    display: flex;
+    justify-content: space-between;
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-muted;
+  }
+
+  &__progress-pct {
+    font-weight: #{$fw-bold};
+
+    &--green { color: $c-primary; }
+    &--gold  { color: $c-gold; }
+  }
+
+  &__totals {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $sp-3;
+  }
+
+  &__total-label { font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans}; color: $c-muted-2; }
+  &__total-value {
+    font: #{$fw-bold} #{$fs-sm}/1.3 #{$font-sans};
+    color: $c-ink;
+    margin-top: 2px;
+
+    &--right { text-align: right; }
+    &--outstanding { color: $c-accent; }
+  }
+}
