@@ -1,6 +1,7 @@
 // =============================================================
-//  main.scss — Customer Portal compilation entry point
-//  Import order is INTENTIONAL: abstracts → base → layout → components → pages
+//  main.scss — compilation entry point
+//  Import order is INTENTIONAL: base → layout → components → pages
+//  (abstracts first because everything else depends on the tokens/mixins)
 // =============================================================
 
 // 1. Abstracts (no CSS output — variables, mixins, functions)
@@ -29,23 +30,21 @@
 @use 'components/otp-input';
 @use 'components/stat-strip';
 @use 'components/quick-actions';
-@use 'components/invoice-card';
-@use 'components/unit-card';
-@use 'components/unit-status';
+@use 'components/property-card';
 @use 'components/offer-card';
 @use 'components/carousel';
 @use 'components/timeline';
-@use 'components/installment-summary';
+@use 'components/notice-card';
 
 // 5. Pages (only page-specific glue/overrides)
 @use 'pages/welcome';
 @use 'pages/auth';
 @use 'pages/dashboard';
-@use 'pages/invoices';
-@use 'pages/invoice-detail';
 @use 'pages/properties';
 @use 'pages/property-detail';
 @use 'pages/payments';
+@use 'pages/installments';
+@use 'pages/noticeboard';
 @use 'pages/offers';
 @use 'pages/news';
 @use 'pages/notifications';

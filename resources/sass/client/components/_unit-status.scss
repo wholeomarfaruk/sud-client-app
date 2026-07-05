@@ -1,0 +1,56 @@
+// components/_unit-status.scss — the two independent status systems used on
+// My Properties v2 & Unit Detail (see design handoff §6b):
+//   .unit-status-pill    — lifecycle/tenure, solid-tint pill
+//   .payment-status-chip — the money, outlined chip + colored dot
+@use '../abstracts/tokens' as *;
+
+// Unit-type colored label, e.g. "Unit G1 · Flat" / "Unit P-12 · Parking"
+.unit-type-text {
+  font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+
+  &--flat    { color: $c-primary; }
+  &--shop    { color: $c-gold; }
+  &--parking { color: $c-blue; }
+  &--community_center { color: $c-violet; }
+}
+
+.unit-status-pill {
+  display: inline-flex;
+  align-items: center;
+  font: #{$fw-bold} #{$fs-cap-sm}/1 #{$font-sans};
+  padding: 3px $sp-3;
+  border-radius: $r-pill;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: .01em;
+
+  &--booked         { color: $c-accent;  background: $c-accent-tint; }
+  &--on_installment { color: $c-primary; background: $c-green-tint; }
+  &--purchased      { color: $c-primary; background: $c-green-tint; }
+  &--handover       { color: $c-gold;    background: $c-gold-tint; }
+  &--rented         { color: $c-violet;  background: $c-violet-tint; }
+}
+
+.payment-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: #{$fw-bold} 9.5px/1 #{$font-sans};
+  color: $c-ink-2;
+  background: $c-white;
+  border: 1px solid $c-border-2;
+  padding: 3px 7px;
+  border-radius: $r-pill;
+  white-space: nowrap;
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: $r-round;
+    flex-shrink: 0;
+  }
+
+  &--paid    &__dot { background: $c-primary; }
+  &--partial &__dot { background: $c-gold; }
+  &--pending &__dot { background: $c-accent; }
+}

@@ -63,6 +63,59 @@ if (!function_exists('bdt_lakh')) {
     }
 }
 
+if (!function_exists('unit_type_label')) {
+    // ERP's App\Enums\Property\UnitType values -> display label
+    function unit_type_label(string $type): string
+    {
+        return match ($type) {
+            'flat' => 'Flat',
+            'shop' => 'Shop',
+            'community_center' => 'Community Center',
+            'office' => 'Office',
+            'parking' => 'Parking',
+            'showroom' => 'Showroom',
+            'warehouse' => 'Warehouse',
+            default => ucfirst(str_replace('_', ' ', $type)),
+        };
+    }
+}
+
+if (!function_exists('unit_type_variant')) {
+    // CSS-safe bucket: only flat/shop/parking/community_center have dedicated
+    // thumbnail colors in the design; anything else falls back to 'flat'.
+    function unit_type_variant(string $type): string
+    {
+        return in_array($type, ['flat', 'shop', 'parking', 'community_center'], true) ? $type : 'flat';
+    }
+}
+
+if (!function_exists('unit_status_label')) {
+    // 'on_installment' -> 'ON INSTALLMENT' (matches the pill copy in the design)
+    function unit_status_label(string $status): string
+    {
+        return match ($status) {
+            'booked' => 'BOOKED',
+            'on_installment' => 'ON INSTALLMENT',
+            'purchased' => 'PURCHASED',
+            'handover' => 'HANDOVER',
+            'rented' => 'RENTED',
+            default => strtoupper(str_replace('_', ' ', $status)),
+        };
+    }
+}
+
+if (!function_exists('payment_status_label')) {
+    function payment_status_label(string $status): string
+    {
+        return match ($status) {
+            'paid' => 'PAID',
+            'partial' => 'PARTIAL',
+            'pending' => 'PENDING',
+            default => strtoupper($status),
+        };
+    }
+}
+
 if (!function_exists('initials')) {
     // "Md. Rafiqul Islam" -> "RI" (skips honorific prefixes like Md./Mr./Mrs./Ms.)
     function initials(string $name): string

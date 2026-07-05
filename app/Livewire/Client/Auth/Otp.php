@@ -57,6 +57,24 @@ class Otp extends Component
         $this->redirectRoute('dashboard');
     }
 
+    public function resend(ErpClient $erp): void
+    {
+        $this->otpError = '';
+
+        try {
+            $response = $erp->resendOtp($this->verificationId);
+        } catch (ErpApiException $e) {
+            $this->otpError = $e->getMessage();
+
+            return;
+        }
+
+        if (isset($response['verification_id'])) {
+            $this->verificationId = $response['verification_id'];
+            session(['client.verification_id' => $this->verificationId]);
+        }
+    }
+
     public function render()
     {
         return view('livewire.client.auth.otp')

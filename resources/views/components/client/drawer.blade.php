@@ -41,25 +41,29 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
                 <span>Dashboard</span>
             </a>
+            <a href="{{ route('client.profile') }}" class="drawer__nav-item {{ $active === 'profile' ? 'is-active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                <span>My Profile</span>
+            </a>
             <a href="{{ route('client.my-properties') }}" class="drawer__nav-item {{ $active === 'my-properties' ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg>
                 <span>My Properties</span>
+            </a>
+            <a href="{{ route('client.invoices') }}" class="drawer__nav-item {{ $active === 'invoices' ? 'is-active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h1M14 15h1"/></svg>
+                <span>Invoices</span>
             </a>
             <a href="{{ route('client.payment-history') }}" class="drawer__nav-item {{ $active === 'payment-history' ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
                 <span>Payment History</span>
             </a>
-            <a href="{{ route('client.installments') }}" class="drawer__nav-item {{ $active === 'installments' ? 'is-active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-                <span>Installments</span>
-            </a>
-            <a href="{{ route('client.noticeboard') }}" class="drawer__nav-item {{ $active === 'noticeboard' ? 'is-active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 8h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 13h6M7 17h4"/></svg>
-                <span>Noticeboard</span>
-            </a>
             <a href="{{ route('client.offers') }}" class="drawer__nav-item {{ $active === 'offers' ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7"/></svg>
                 <span>Offers</span>
+            </a>
+            <a href="{{ route('client.news') }}" class="drawer__nav-item {{ $active === 'news' ? 'is-active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>
+                <span>News &amp; Articles</span>
             </a>
             <a href="{{ route('client.notifications') }}" class="drawer__nav-item {{ $active === 'notifications' ? 'is-active' : '' }}">
                 <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
@@ -67,10 +71,6 @@
                 @if ($sidebarUnreadNotifications > 0)
                     <span class="drawer__badge">{{ $sidebarUnreadNotifications }}</span>
                 @endif
-            </a>
-            <a href="{{ route('client.profile') }}" class="drawer__nav-item {{ $active === 'profile' ? 'is-active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-                <span>Profile</span>
             </a>
         </div>
 
@@ -88,6 +88,10 @@
                     <svg viewBox="0 0 24 24" fill="#0F6B2E"><path d="M17.5 14.4c-.3-.15-1.7-.84-2-.93-.27-.1-.46-.15-.65.14-.19.29-.74.93-.91 1.12-.17.19-.34.21-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.77-1.44-1.71-1.6-2-.17-.29-.02-.45.12-.59.13-.13.29-.34.43-.51.15-.17.19-.29.29-.48.1-.19.05-.36-.02-.51-.07-.14-.65-1.57-.89-2.15-.23-.56-.47-.48-.65-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1 .98-1 2.38s1.02 2.76 1.17 2.95c.14.19 2.01 3.07 4.87 4.31.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34Z"/><path d="M12 2a10 10 0 0 0-8.52 15.27L2 22l4.85-1.42A10 10 0 1 0 12 2Zm0 18.2a8.16 8.16 0 0 1-4.16-1.14l-.3-.18-2.88.84.77-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
                 </span>
                 WhatsApp Chat
+            </a>
+            <a href="https://starunitydevelopment.com" target="_blank" rel="noopener" class="drawer__support-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg>
+                Visit Website
             </a>
             <form method="POST" action="{{ route('client.logout') }}">
                 @csrf

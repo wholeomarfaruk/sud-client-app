@@ -22,6 +22,7 @@
 
     &--done { background: $c-primary; svg { stroke: $c-white; } }
     &--due  { border: 2px solid $c-accent; background: $c-accent-tint; }
+    &--overdue { border: 2px solid $c-pdf; background: $c-pdf-tint; svg { stroke: $c-pdf; } }
     &--upcoming { border: 2px solid $c-border-3; background: $c-white; }
 
     svg { width: 14px; height: 14px; }
@@ -53,6 +54,7 @@
 
     &--muted { color: $c-muted; }
     &--accent { color: $c-accent; }
+    &--danger { color: $c-pdf; }
   }
 
   &__meta {
@@ -70,6 +72,19 @@
   &__due-label {
     font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
     color: $c-accent;
+    margin-top: 1px;
+  }
+
+  &__overdue-card {
+    background: $c-pdf-tint;
+    border: 1.5px solid $c-pdf;
+    border-radius: $r-md;
+    padding: 11px $sp-3;
+  }
+
+  &__overdue-label {
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-pdf;
     margin-top: 1px;
   }
 

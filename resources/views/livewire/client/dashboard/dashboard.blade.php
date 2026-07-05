@@ -42,7 +42,7 @@
             </div>
             <div class="next-installment__amount">{{ $nextInstallment['amount'] }}</div>
             <div class="next-installment__meta">{{ $nextInstallment['meta'] }}</div>
-            <a href="{{ route('client.installments') }}" class="btn btn--outline next-installment__cta">
+            <a href="{{ route('client.invoices') }}" class="btn btn--outline next-installment__cta">
                 View installment details
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
             </a>
@@ -50,19 +50,19 @@
     @endif
 
     <div class="quick-actions" style="padding-left:18px;padding-right:18px">
-        <a href="{{ route('client.installments') }}" class="quick-actions__item">
+        <a href="{{ route('client.invoices') }}" class="quick-actions__item">
             <span class="quick-actions__icon quick-actions__icon--accent">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
             </span>
             <span class="quick-actions__label">Pay now</span>
         </a>
-        <a href="{{ route('client.installments') }}" class="quick-actions__item">
+        <a href="{{ route('client.invoices') }}" class="quick-actions__item">
             <span class="quick-actions__icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
             </span>
             <span class="quick-actions__label">Schedule</span>
         </a>
-        <a href="{{ route('client.property-detail', 1) }}" class="quick-actions__item">
+        <a href="{{ route('client.my-properties') }}" class="quick-actions__item">
             <span class="quick-actions__icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 15h6"/></svg>
             </span>
@@ -79,12 +79,6 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
             </span>
             <span class="quick-actions__label">History</span>
-        </a>
-        <a href="{{ route('client.noticeboard') }}" class="quick-actions__item">
-            <span class="quick-actions__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 8h18v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M7 13h6M7 17h4"/></svg>
-            </span>
-            <span class="quick-actions__label">Notices</span>
         </a>
         <a href="tel:+8809610000111" class="quick-actions__item">
             <span class="quick-actions__icon">

@@ -4,9 +4,9 @@ use App\Livewire\Client\Auth\ForgotPassword;
 use App\Livewire\Client\Auth\Login;
 use App\Livewire\Client\Auth\Otp;
 use App\Livewire\Client\Dashboard\Dashboard;
-use App\Livewire\Client\Installments\Installments;
+use App\Livewire\Client\Invoices\InvoiceDetail;
+use App\Livewire\Client\Invoices\Invoices;
 use App\Livewire\Client\News\News;
-use App\Livewire\Client\Noticeboard\Noticeboard;
 use App\Livewire\Client\Notifications\Notifications;
 use App\Livewire\Client\Offers\Offers;
 use App\Livewire\Client\Payments\PaymentHistory;
@@ -19,11 +19,10 @@ use App\Services\Erp\ErpApiException;
 use App\Services\Erp\ErpClient;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', \App\Livewire\Website\Home\Home::class)->name('home');
+Route::get('/', Welcome::class)->name('home');
 
 // Customer Portal — client.starunitydevelopment.com (data via the ERP API; see App\Services\Erp\ErpClient)
 Route::name('client.')->group(function () {
-    Route::get('/welcome', Welcome::class)->name('welcome');
     Route::get('/login', Login::class)->name('login');
     Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
     Route::get('/otp-verification', Otp::class)->name('otp');
@@ -41,11 +40,11 @@ Route::name('client.')->group(function () {
         return redirect()->route('client.login');
     })->name('logout');
 
-    Route::get('/my-properties', MyProperties::class)->name('my-properties');
-    Route::get('/my-properties/{property}', PropertyDetail::class)->name('property-detail');
+    Route::get('/my-properties', MyProperties::class)->middleware('client.auth')->name('my-properties');
+    Route::get('/my-properties/{sale}/{saleUnit}', PropertyDetail::class)->middleware('client.auth')->name('property-detail');
+    Route::get('/invoices', Invoices::class)->middleware('client.auth')->name('invoices');
+    Route::get('/invoices/{sale}', InvoiceDetail::class)->middleware('client.auth')->name('invoice-detail');
     Route::get('/payment-history', PaymentHistory::class)->name('payment-history');
-    Route::get('/installments', Installments::class)->name('installments');
-    Route::get('/noticeboard', Noticeboard::class)->name('noticeboard');
     Route::get('/offers', Offers::class)->name('offers');
     Route::get('/news', News::class)->name('news');
     Route::get('/notifications', Notifications::class)->name('notifications');

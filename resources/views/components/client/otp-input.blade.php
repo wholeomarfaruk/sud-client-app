@@ -35,7 +35,12 @@
             <span class="otp__timer" x-text="`Resend in 0:${String(countdown).padStart(2,'0')}`"></span>
         </template>
         <template x-if="countdown === 0">
-            <button type="button" class="otp__resend-btn" @click="resend()">Resend code</button>
+            <button type="button" class="otp__resend-btn"
+                    wire:loading.attr="disabled" wire:target="resend"
+                    @click="resend()">
+                <span wire:loading.remove wire:target="resend">Resend code</span>
+                <span wire:loading wire:target="resend">Sending&hellip;</span>
+            </button>
         </template>
     </p>
 </div>
@@ -68,7 +73,14 @@
                     const chars = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, 6).split('');
                     chars.forEach((c, i) => this.digits[i] = c);
                 },
-                resend() { this.countdown = 48; this.tick(); },
+                async resend() {
+                    await this.$wire.resend();
+                    if (!this.$wire.otpError) {
+                        this.digits = ['', '', '', '', '', ''];
+                        this.countdown = 48;
+                        this.tick();
+                    }
+                },
             };
         }
     </script>

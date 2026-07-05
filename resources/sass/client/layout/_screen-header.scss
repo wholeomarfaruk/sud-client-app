@@ -4,7 +4,7 @@
 
 // Hamburger/back + title + bell (or text action) row used on most
 // authenticated screens (§6: My Properties, Payment History, Installments,
-// Noticeboard, Offers, News, Notifications).
+// Offers, News, Notifications).
 .screen-header {
   @include safe-top;
   display: flex;

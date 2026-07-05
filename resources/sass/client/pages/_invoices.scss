@@ -1,9 +1,9 @@
-// pages/_noticeboard.scss — 10 Noticeboard
+// pages/_invoices.scss — Invoices (list)
 @use '../abstracts/tokens' as *;
 
-.notices-list {
+.invoices-list {
   padding: 0 $screen-pad calc(#{$bottom-nav-h} + 14px);
   display: flex;
   flex-direction: column;
-  gap: 11px;
+  gap: $sp-4;
 }

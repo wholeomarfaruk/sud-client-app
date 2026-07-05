@@ -1,0 +1,116 @@
+// components/_invoice-card.scss — Invoices list card
+// An invoice can bundle multiple units (even across properties) under one
+// combined purchase + installment plan.
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.invoice-card {
+  @include card($r-2xl);
+  display: block;
+  overflow: hidden;
+
+  &__banner {
+    min-height: 92px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: $sp-3;
+
+    &--green { background: $grad-green-banner; }
+    &--gold  { background: $grad-gold; }
+
+    .unit-status-pill { position: absolute; top: $sp-3; right: $sp-3; }
+  }
+
+  &__watermark {
+    position: absolute;
+    right: $sp-4;
+    bottom: $sp-2;
+    opacity: .25;
+
+    svg { width: 64px; height: 56px; stroke: $c-white; }
+  }
+
+  &__title { font: #{$fw-extra} #{$fs-title}/1.25 #{$font-sans}; color: $c-white; @include truncate; }
+
+  &__meta {
+    font: #{$fw-medium} #{$fs-cap}/1.3 #{$font-sans};
+    color: rgba($c-white, .85);
+    margin-top: 3px;
+  }
+
+  &__body { padding: $sp-4; }
+
+  &__head-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $sp-2;
+  }
+
+  &__invoice-no { font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans}; color: $c-muted-2; }
+
+  &__units {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: $sp-3;
+  }
+
+  &__unit-chip {
+    font: #{$fw-semibold} #{$fs-cap-sm}/1 #{$font-sans};
+    color: $c-ink-2;
+    background: $c-bg-mist;
+    border: 1px solid $c-border;
+    padding: 4px 9px;
+    border-radius: $r-pill;
+  }
+
+  &__progress-row {
+    display: flex;
+    justify-content: space-between;
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-muted;
+    margin-top: $sp-3;
+  }
+
+  &__progress-pct {
+    font-weight: #{$fw-bold};
+
+    &--green { color: $c-primary; }
+    &--gold  { color: $c-gold; }
+  }
+
+  &__totals {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $sp-3;
+  }
+
+  &__total-label { font: #{$fw-medium} #{$fs-cap-sm}/1 #{$font-sans}; color: $c-muted-2; }
+  &__total-value {
+    font: #{$fw-bold} #{$fs-sm}/1.3 #{$font-sans};
+    color: $c-ink;
+    margin-top: 2px;
+
+    &--right { text-align: right; }
+    &--outstanding { color: $c-accent; }
+  }
+
+  &__installments {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $sp-3;
+    padding-top: $sp-3;
+    border-top: 1px solid $c-divider;
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-muted;
+  }
+
+  &__installments-value {
+    color: $c-ink;
+    font-weight: #{$fw-bold};
+
+    &--danger { color: $c-pdf; }
+  }
+}

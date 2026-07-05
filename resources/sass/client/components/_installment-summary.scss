@@ -1,4 +1,5 @@
-// pages/_installments.scss — 09 Installment Schedule
+// components/_installment-summary.scss — paid/next-due/remaining strip
+// (used above payment schedule timelines, e.g. Invoice Detail)
 @use '../abstracts/tokens' as *;
 @use '../abstracts/mixins' as *;
 
@@ -17,7 +18,6 @@
 
     &--accent { color: $c-primary; }
     &--due { color: $c-accent; }
+    &--danger { color: $c-pdf; }
   }
 }
-
-.installments-body { padding-bottom: calc(#{$bottom-nav-h} + 14px); }
