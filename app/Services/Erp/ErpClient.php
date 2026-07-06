@@ -145,6 +145,26 @@ class ErpClient
         return $this->request('get', '/properties/'.$sale.'/payment-schedules', [], $accessToken);
     }
 
+    /**
+     * Payment History — every schedule the customer has paid against (partial
+     * or fully paid), across all properties, grouped by month.
+     * Payload: ['success' => true, 'data' => [
+     *   summary: [total_paid, transaction_count, since],
+     *   properties: [ [id, name, code] ],
+     *   groups: [ [month, month_label, items: [ [
+     *     id, sale_id, sale_number, payment_category, label, sequence_no,
+     *     amount, paid_amount, due_amount, status, display_status,
+     *     due_date, paid_date, method, property: [id, name, code] | null,
+     *     transactions: [ [id, amount, method, reference_no, payer_name,
+     *     phone, notes, datetime, attachments] ],
+     *   ] ] ] ],
+     * ] ]
+     */
+    public function paymentHistory(string $accessToken): array
+    {
+        return $this->request('get', '/payment-history', [], $accessToken);
+    }
+
     protected function client(): PendingRequest
     {
         return Http::baseUrl(rtrim(config('services.erp.base_url'), '/'))

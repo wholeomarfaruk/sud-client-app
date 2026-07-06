@@ -44,7 +44,7 @@ Route::name('client.')->group(function () {
     Route::get('/my-properties/{sale}/{saleUnit}', PropertyDetail::class)->middleware('client.auth')->name('property-detail');
     Route::get('/invoices', Invoices::class)->middleware('client.auth')->name('invoices');
     Route::get('/invoices/{sale}', InvoiceDetail::class)->middleware('client.auth')->name('invoice-detail');
-    Route::get('/payment-history', PaymentHistory::class)->name('payment-history');
+    Route::get('/payment-history', PaymentHistory::class)->middleware('client.auth')->name('payment-history');
     Route::get('/offers', Offers::class)->name('offers');
     Route::get('/news', News::class)->name('news');
     Route::get('/notifications', Notifications::class)->name('notifications');

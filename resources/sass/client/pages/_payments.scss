@@ -45,9 +45,57 @@
 }
 
 .payments-list {
-  margin-top: $sp-3;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 9px;
-  padding-bottom: calc(#{$bottom-nav-h} + 14px);
+  padding-bottom: 10px;
+}
+
+// A payment-schedule row that expands to reveal its individual transactions.
+.payment-row {
+  // .list-row already supplies display/padding/background/border/shadow —
+  // this only resets the button-specific defaults browsers add on top.
+  &__toggle {
+    width: 100%;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  &__chevron {
+    flex-shrink: 0;
+    align-self: center;
+    margin-left: $sp-2;
+
+    svg { width: 16px; height: 16px; stroke: $c-muted-2; transition: transform .2s ease; }
+
+    &.is-open svg { transform: rotate(180deg); }
+  }
+
+  &__transactions {
+    margin: 6px 0 0 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+.transaction-row {
+  background: $c-bg-mist;
+  border-radius: $r-sm;
+  padding: 8px 10px;
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    font: #{$fw-semibold} #{$fs-cap}/1 #{$font-sans};
+    color: $c-ink;
+  }
+
+  &__meta {
+    font: #{$fw-medium} #{$fs-cap-sm}/1.4 #{$font-sans};
+    color: $c-muted-2;
+    margin-top: 3px;
+  }
 }
