@@ -3,6 +3,7 @@
 use App\Livewire\Client\Auth\ForgotPassword;
 use App\Livewire\Client\Auth\Login;
 use App\Livewire\Client\Auth\Otp;
+use App\Livewire\Client\Auth\ResetPassword;
 use App\Livewire\Client\Dashboard\Dashboard;
 use App\Livewire\Client\Invoices\InvoiceDetail;
 use App\Livewire\Client\Invoices\Invoices;
@@ -25,6 +26,7 @@ Route::get('/', Welcome::class)->name('home');
 Route::name('client.')->group(function () {
     Route::get('/login', Login::class)->name('login');
     Route::get('/forgot-password', ForgotPassword::class)->name('forgot-password');
+    Route::get('/reset-password', ResetPassword::class)->name('reset-password');
     Route::get('/otp-verification', Otp::class)->name('otp');
     Route::post('/logout', function (ErpClient $erp) {
         if ($token = session('client.access_token')) {

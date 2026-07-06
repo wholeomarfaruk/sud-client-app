@@ -31,6 +31,33 @@ class ErpClient
         ]);
     }
 
+    /**
+     * Send a password reset code to the account matching the given login
+     * (phone or email). Always a generic success — the ERP never reveals
+     * whether an account exists. Server-side cooldown is 60s between sends.
+     */
+    public function forgotPassword(string $login): array
+    {
+        return $this->request('post', '/forgot-password', [
+            'login' => $login,
+        ]);
+    }
+
+    /**
+     * Verify the reset code and set the new password in one step (the ERP
+     * has no separate "verify code" call for this flow). Code expires in
+     * 15 minutes; 5 wrong attempts burns it.
+     */
+    public function resetPassword(string $login, string $code, string $password, string $passwordConfirmation): array
+    {
+        return $this->request('post', '/reset-password', [
+            'login' => $login,
+            'code' => $code,
+            'password' => $password,
+            'password_confirmation' => $passwordConfirmation,
+        ]);
+    }
+
     public function dashboard(string $accessToken): array
     {
         return $this->request('get', '/dashboard', [], $accessToken);
