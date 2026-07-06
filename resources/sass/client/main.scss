@@ -36,6 +36,7 @@
 @use 'components/carousel';
 @use 'components/timeline';
 @use 'components/installment-summary';
+@use 'components/content-detail';
 
 // 5. Pages (only page-specific glue/overrides)
 @use 'pages/welcome';

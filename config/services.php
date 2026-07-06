@@ -40,4 +40,10 @@ return [
         'timeout' => env('ERP_API_TIMEOUT', 15),
     ],
 
+    'website' => [
+        'base_url' => env('WEBSITE_API_BASE_URL', 'http://127.0.0.1:8200/api'),
+        'api_key' => env('WEBSITE_API_KEY'),
+        'timeout' => env('WEBSITE_API_TIMEOUT', 15),
+    ],
+
 ];

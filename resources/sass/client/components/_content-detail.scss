@@ -1,0 +1,71 @@
+// components/_content-detail.scss — News Detail & Offer Detail
+@use '../abstracts/tokens' as *;
+@use '../abstracts/mixins' as *;
+
+.content-hero {
+  height: 220px;
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: $grad-green-card;
+
+  &__image { width: 100%; height: 100%; object-fit: cover; }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg { width: 64px; height: 64px; stroke: $c-white; opacity: .35; }
+  }
+
+  &__back {
+    @include tap-target;
+    @include safe-top;
+    position: absolute;
+    top: 44px;
+    left: $screen-pad;
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: rgba(0, 0, 0, .28);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg { width: 18px; height: 18px; stroke: $c-white; }
+  }
+
+  &__badge {
+    position: absolute;
+    top: 44px;
+    right: $screen-pad;
+  }
+}
+
+.content-sheet {
+  flex: 1;
+  background: $c-bg-mist;
+  border-radius: 20px 20px 0 0;
+  margin-top: -14px;
+  padding: $sp-6 $screen-pad calc(#{$bottom-nav-h} + 16px);
+  position: relative;
+  z-index: 1;
+
+  &__title { font: #{$fw-extra} #{$fs-h2 - 2px}/1.3 #{$font-sans}; color: $c-ink; }
+  &__date { font: #{$fw-medium} #{$fs-cap}/1 #{$font-sans}; color: $c-muted-2; margin-top: 6px; }
+
+  &__body {
+    margin-top: $sp-5;
+    font: #{$fw-medium} #{$fs-body}/1.7 #{$font-sans};
+    color: $c-ink-2;
+
+    p { margin-bottom: $sp-4; }
+    h2, h3 { font: #{$fw-bold} #{$fs-title}/1.4 #{$font-sans}; color: $c-ink; margin: $sp-5 0 $sp-2; }
+    ul, ol { margin: 0 0 $sp-4 $sp-5; }
+    li { margin-bottom: 6px; }
+    img { max-width: 100%; border-radius: $r-md; margin: $sp-3 0; }
+    a { color: $c-primary; font-weight: #{$fw-bold}; }
+    strong, b { color: $c-ink; }
+  }
+}
