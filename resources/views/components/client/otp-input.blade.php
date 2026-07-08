@@ -62,11 +62,11 @@
                 onInput(e, i) {
                     const v = e.target.value.replace(/\D/g, '');
                     this.digits[i] = v.slice(-1);
-                    if (v && i < 5) e.target.parentElement.children[i + 1].focus();
+                    if (v && i < 5) e.target.nextElementSibling.focus();
                 },
                 onBackspace(e, i) {
                     if (!this.digits[i] && i > 0) {
-                        e.target.parentElement.children[i - 1].focus();
+                        e.target.previousElementSibling.focus();
                     }
                 },
                 onPaste(e) {
