@@ -6,12 +6,14 @@
     <div class="otp__cells">
         <template x-for="(d, i) in digits" :key="i">
             <input
-                type="text" inputmode="numeric" maxlength="1"
+                type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code"
                 class="otp__cell"
                 :class="{ 'is-filled': digits[i] !== '' }"
-                x-model="digits[i]"
-                @input="onInput($event, i)"
+                :value="digits[i] === '' ? String.fromCharCode(8203) : digits[i]"
                 @keydown.backspace="onBackspace($event, i)"
+                @keydown="onKeydown($event, i)"
+                @beforeinput="onBeforeinput($event)"
+                @input="onInput($event, i)"
                 @paste.prevent="onPaste($event)"
             >
         </template>
@@ -52,30 +54,90 @@
             return {
                 digits: ['', '', '', '', '', ''],
                 countdown: 48,
+                _backspaceFlag: false,
                 get complete() { return this.digits.every(d => d !== ''); },
-                init() { this.tick(); },
+                init() {
+                    this.tick();
+                    this.focusCell(0);
+                },
                 tick() {
                     const t = setInterval(() => {
                         if (this.countdown > 0) this.countdown--; else clearInterval(t);
                     }, 1000);
                 },
-                onInput(e, i) {
-                    const v = e.target.value.replace(/\D/g, '');
-                    this.digits[i] = v.slice(-1);
-                    if (v && i < 5) {
-                        e.target.nextElementSibling.focus();
-                    } else if (!v && i > 0 && e.inputType === 'deleteContentBackward') {
-                        e.target.previousElementSibling.focus();
-                    }
+                focusCell(index) {
+                    this.$nextTick(() => {
+                        const cells = this.$root.querySelectorAll('.otp__cell');
+                        if (cells[index]) cells[index].focus();
+                    });
                 },
+                // Validation layer 1 (original): reliable on desktop keyboards.
                 onBackspace(e, i) {
                     if (!this.digits[i] && i > 0) {
                         e.target.previousElementSibling.focus();
                     }
                 },
+                // Validation layer 2: records any signal that looks like a backspace/delete
+                // action, since some mobile IMEs report keyCode 229 / key "Unidentified"
+                // and skip the ".backspace" modifier used by onBackspace above.
+                markBackspace(e) {
+                    if (e.key === 'Backspace' || e.keyCode === 8 || e.inputType === 'deleteContentBackward') {
+                        this._backspaceFlag = true;
+                    }
+                },
+                // Validation layer 3: stops stray non-digit characters from a physical
+                // keyboard before they ever render (arrows/tab/ctrl combos pass through
+                // since e.key.length > 1 for those).
+                blockNonDigit(e) {
+                    if (e.key.length === 1 && !/\d/.test(e.key) && !e.ctrlKey && !e.metaKey) {
+                        e.preventDefault();
+                    }
+                },
+                onKeydown(e, i) {
+                    this.markBackspace(e);
+                    this.blockNonDigit(e);
+                },
+                onBeforeinput(e) {
+                    this.markBackspace(e);
+                },
+                // Validation layer 4 (primary, mobile-safe): the :value binding renders an
+                // invisible zero-width character instead of '' when a cell is logically
+                // empty, so there is always real content to delete. That guarantees this
+                // input event fires reliably even on mobile keyboards that silently drop
+                // keydown for Backspace on an apparently-empty field.
+                onInput(e, i) {
+                    const wasBackspace = this._backspaceFlag || e.inputType === 'deleteContentBackward';
+                    this._backspaceFlag = false;
+
+                    const raw = e.target.value.replace(/\D/g, '');
+
+                    if (raw.length > 1) {
+                        // Whole code arrived at once: iOS QuickType suggestion, Android
+                        // SMS autofill, or a paste that landed here instead of onPaste.
+                        this.fillFrom(0, raw);
+                        return;
+                    }
+
+                    const hadDigit = this.digits[i] !== '';
+                    this.digits[i] = raw.slice(-1);
+
+                    if (this.digits[i] && i < 5) {
+                        e.target.nextElementSibling.focus();
+                        return;
+                    }
+                    if (!this.digits[i] && wasBackspace && !hadDigit && i > 0) {
+                        e.target.previousElementSibling.focus();
+                    }
+                },
                 onPaste(e) {
-                    const chars = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, 6).split('');
-                    chars.forEach((c, i) => this.digits[i] = c);
+                    this.fillFrom(0, e.clipboardData.getData('text') || '');
+                },
+                fillFrom(start, str) {
+                    const chars = str.replace(/\D/g, '').slice(0, 6 - start).split('');
+                    chars.forEach((c, idx) => { this.digits[start + idx] = c; });
+                    if (!this.complete) {
+                        this.focusCell(Math.min(start + chars.length, 5));
+                    }
                 },
                 async resend() {
                     await this.$wire.resend();
@@ -83,6 +145,7 @@
                         this.digits = ['', '', '', '', '', ''];
                         this.countdown = 48;
                         this.tick();
+                        this.focusCell(0);
                     }
                 },
             };
