@@ -62,7 +62,11 @@
                 onInput(e, i) {
                     const v = e.target.value.replace(/\D/g, '');
                     this.digits[i] = v.slice(-1);
-                    if (v && i < 5) e.target.nextElementSibling.focus();
+                    if (v && i < 5) {
+                        e.target.nextElementSibling.focus();
+                    } else if (!v && i > 0 && e.inputType === 'deleteContentBackward') {
+                        e.target.previousElementSibling.focus();
+                    }
                 },
                 onBackspace(e, i) {
                     if (!this.digits[i] && i > 0) {
