@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @if (config('services.webpush.vapid_public_key'))
+        <meta name="vapid-public-key" content="{{ config('services.webpush.vapid_public_key') }}">
+    @endif
     <title>{{ $title ?? 'Star Unity — Customer Portal' }}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

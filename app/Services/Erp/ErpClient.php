@@ -192,6 +192,45 @@ class ErpClient
         return $this->request('get', '/payment-history', [], $accessToken);
     }
 
+    /**
+     * Notifications — paginated list (Notifications page).
+     * Payload: ['success' => true, 'data' => [ 'data' => [ [
+     *   id, is_read, read_at,
+     *   notification: [id, type, title, body, badge, action_url, sent_at],
+     * ], ... ], 'current_page', 'last_page', ... ] ]
+     */
+    public function notifications(string $accessToken, int $page = 1): array
+    {
+        return $this->request('get', '/notifications', ['page' => $page], $accessToken);
+    }
+
+    public function unreadNotificationCount(string $accessToken): array
+    {
+        return $this->request('get', '/notifications/unread-count', [], $accessToken);
+    }
+
+    public function markNotificationRead(string $accessToken, int $notificationId): array
+    {
+        return $this->request('post', "/notifications/{$notificationId}/read", [], $accessToken);
+    }
+
+    public function markAllNotificationsRead(string $accessToken): array
+    {
+        return $this->request('post', '/notifications/mark-all-read', [], $accessToken);
+    }
+
+    /** Registers/updates a browser push subscription. Server-side dedupes by endpoint. */
+    public function storePushSubscription(string $accessToken, string $endpoint, string $p256dh, string $auth): array
+    {
+        return $this->request('post', '/push-subscriptions', [
+            'endpoint' => $endpoint,
+            'keys' => [
+                'p256dh' => $p256dh,
+                'auth' => $auth,
+            ],
+        ], $accessToken);
+    }
+
     protected function client(): PendingRequest
     {
         return Http::baseUrl(rtrim(config('services.erp.base_url'), '/'))

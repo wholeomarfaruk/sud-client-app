@@ -7,3 +7,43 @@
   flex-direction: column;
   gap: $sp-3;
 }
+
+// Notification detail modal — opened from a list row tap.
+.modal-scrim {
+  position: fixed;
+  inset: 0;
+  background: $c-scrim;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal-panel {
+  width: 100%;
+  max-width: $app-max-width;
+  background: $c-white;
+  border-radius: $r-3xl $r-3xl 0 0;
+  padding: $sp-6;
+  box-shadow: $sh-raised;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $sp-3;
+    margin-bottom: $sp-4;
+  }
+
+  &__title {
+    font: #{$fw-bold} #{$fs-title}/1.3 #{$font-sans};
+    color: $c-ink;
+  }
+
+  &__body {
+    color: $c-ink-2;
+    font: #{$fw-medium} #{$fs-body}/1.5 #{$font-sans};
+
+    p { margin: 0 0 $sp-2; }
+  }
+}

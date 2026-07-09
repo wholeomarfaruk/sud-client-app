@@ -48,6 +48,61 @@
             </div>
         </div>
 
+        <div class="profile-section-label">Notifications</div>
+        <div class="profile-list"
+             x-data="{
+                 status: Notification.permission === 'granted' ? 'granted' : 'idle',
+                 loading: false,
+                 showPrompt: false,
+                 async enable() {
+                     if (this.loading || this.status === 'granted') return;
+                     this.loading = true;
+                     const result = await window.enablePushNotifications();
+                     this.status = result.status;
+                     this.loading = false;
+                     this.showPrompt = false;
+                 },
+             }">
+            <div class="profile-list__row">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+                <div>
+                    <div class="profile-list__label">Push Notifications</div>
+                    <div class="profile-list__value" x-show="status === 'granted'" x-cloak>Enabled on this device</div>
+                    <div class="profile-list__value" x-show="status === 'denied'" x-cloak>Blocked — enable in browser settings</div>
+                    <div class="profile-list__value" x-show="status === 'unsupported'" x-cloak>Not supported on this browser</div>
+                    <div class="profile-list__value" x-show="status === 'idle'" x-cloak>Get alerts for dues, offers &amp; updates</div>
+                </div>
+                <button type="button" class="btn btn--outline u-ml-auto" style="padding:6px 16px"
+                        x-show="status !== 'granted'" x-cloak
+                        x-text="loading ? 'Enabling…' : 'Enable'"
+                        :disabled="loading"
+                        @click="showPrompt = true"></button>
+            </div>
+
+            {{-- In-app pre-prompt: explains the value before the browser's native
+                 permission popup fires, so the real prompt only appears once the
+                 user has already opted in here. --}}
+            <template x-teleport="body">
+                <div class="modal-scrim" x-show="showPrompt" x-cloak @click="showPrompt = false">
+                    <div class="modal-panel" @click.stop>
+                        <div class="modal-panel__header">
+                            <span class="modal-panel__title">Enable notifications?</span>
+                            <button type="button" class="screen-header__icon-btn" aria-label="Close" @click="showPrompt = false">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                            </button>
+                        </div>
+                        <div class="modal-panel__body">
+                            <p>Get notified about upcoming dues, payment confirmations, offers and construction updates — right on this device.</p>
+                        </div>
+                        <div style="display:flex; gap:10px; margin-top:16px">
+                            <button type="button" class="btn btn--outline" style="flex:1" @click="showPrompt = false">Not now</button>
+                            <button type="button" class="btn btn--primary" style="flex:1" :disabled="loading" @click="enable" x-text="loading ? 'Enabling…' : 'Enable'"></button>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
         <a href="{{ route('client.change-password') }}" class="btn btn--outline" style="margin-top:22px">Change Password</a>
     </div>
 

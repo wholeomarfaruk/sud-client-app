@@ -18,6 +18,8 @@ use App\Livewire\Client\Profile\Profile;
 use App\Livewire\Client\Properties\MyProperties;
 use App\Livewire\Client\Properties\PropertyDetail;
 use App\Livewire\Client\Welcome\Welcome;
+use App\Http\Controllers\Client\NotificationController;
+use App\Http\Controllers\Client\PushSubscriptionController;
 use App\Services\Erp\ErpApiException;
 use App\Services\Erp\ErpClient;
 use Illuminate\Support\Facades\Route;
@@ -53,9 +55,17 @@ Route::name('client.')->group(function () {
     Route::get('/offers/{offerId}', OfferDetail::class)->name('offer-detail');
     Route::get('/news', News::class)->name('news');
     Route::get('/news/{news}', NewsDetail::class)->name('news-detail');
-    Route::get('/notifications', Notifications::class)->name('notifications');
+    Route::get('/notifications', Notifications::class)->middleware('client.auth')->name('notifications');
     Route::get('/profile', Profile::class)->middleware('client.auth')->name('profile');
     Route::get('/change-password', ChangePassword::class)->name('change-password');
 });
 
 Route::get('/dashboard', Dashboard::class)->middleware('client.auth')->name('dashboard');
+
+// Called from resources/js/client.js (page context) and public/service-worker.js
+// (background push/notificationclick — no page to read a CSRF token from,
+// see bootstrap/app.php's validateCsrfTokens except-list for these two).
+Route::middleware('client.auth')->group(function () {
+    Route::post('/push-subscriptions', [PushSubscriptionController::class, 'store'])->name('push-subscriptions.store');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'read'])->name('notifications.read');
+});

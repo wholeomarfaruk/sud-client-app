@@ -24,6 +24,16 @@ return Application::configure(basePath: dirname(__DIR__))
             'panel' => \App\Http\Middleware\PanelMiddleware::class,
             'client.auth' => \App\Http\Middleware\EnsureClientIsAuthenticated::class,
         ]);
+
+        // The service worker (public/service-worker.js) fires these from a
+        // background push/notificationclick event with no page context to
+        // read a CSRF meta tag from. Both routes are session-scoped POSTs
+        // (push-subscriptions.store, notifications.read) acting only on the
+        // authenticated client's own resources.
+        $middleware->validateCsrfTokens(except: [
+            'push-subscriptions',
+            'notifications/*/read',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
